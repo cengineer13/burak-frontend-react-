@@ -9,12 +9,17 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
 import "./css/index.css"
 
+import { BrowserRouter as Router } from "react-router-dom";
+
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
         <CssBaseline />
+        <Router>
+          <App />
+        </Router>
       </ThemeProvider>
 
     </Provider>
