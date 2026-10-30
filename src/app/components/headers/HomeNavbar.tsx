@@ -2,31 +2,18 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export function HomeNavbar() {
-  const authMember = null; // Agar authentifikat bolgan user bolmasa mantigi uchun
+  const authMember = true; // Agar authentifikat bolgan user bolmasa mantigi uchun
   return (
     <div className="home-navbar">
       {/* Container 2 tarafdan default holatda ma'lum bir padding tashlayd */}
-      <Container sx={{ mt: "55px", height: "642px" }}>
-        <Stack
-          sx={{ height: "50px" }}
-          flexDirection={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-        >
+      <Container className="navbar-container">
+        <Stack className="menu">
           <Box>
             <NavLink to="/">
-              <img
-                style={{ width: "125px", height: "30px" }}
-                src="/icons/burak.svg"
-              />
+              <img className="brand-logo" src="/icons/burak.svg" />
             </NavLink>
           </Box>
-          <Stack
-            flexDirection={"row"}
-            justifyContent={"space-between"}
-            minWidth={"700px"}
-            alignItems={"center"}
-          >
+          <Stack className="links">
             <Box className={"hover-line"}>
               <NavLink to="/" activeClassName={"underline"}>
                 {" "}
@@ -65,15 +52,16 @@ export function HomeNavbar() {
 
             {!authMember ? (
               <Box>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "#3776CC", color: "#f8f8ff" }}
-                >
+                <Button variant="contained" className="login-button">
                   Login
                 </Button>
               </Box>
             ) : (
-              <img />
+              <img
+                className="user-avatar"
+                src={"/icons/default-user.svg"}
+                aria-haspopup={true}
+              />
             )}
           </Stack>
         </Stack>
