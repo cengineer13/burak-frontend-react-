@@ -2,7 +2,7 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export function HomeNavbar() {
-  const authMember = true; // Agar authentifikat bolgan user bolmasa mantigi uchun
+  const authMember = null; // Agar authentifikat bolgan user bolmasa mantigi uchun
   return (
     <div className="home-navbar">
       {/* Container 2 tarafdan default holatda ma'lum bir padding tashlayd */}
@@ -65,7 +65,24 @@ export function HomeNavbar() {
             )}
           </Stack>
         </Stack>
-        <Stack>Detail</Stack>
+
+        <Stack className={"header-frame"}>
+          <Stack className={"detail"}>
+            <Box className={"head-main-txt"}>World's Most Delicous Cousine</Box>
+            <Box className={"welcome-txt"}>The Choice, not just a choice</Box>
+            <Box className={"service-text"}>24 hours service</Box>
+            <Box className={"signup"}>
+              {!authMember ? (
+                <Button variant={"contained"} className={"signup-button"}>
+                  SIGN UP
+                </Button>
+              ) : null}
+            </Box>
+          </Stack>
+          <Box className={"logo-frame"}>
+            <div className={"logo-img"}></div>
+          </Box>
+        </Stack>
       </Container>
     </div>
   );
