@@ -2777,6 +2777,13 @@
     "@types/react" "*"
     csstype "^3.2.2"
 
+"@types/swiper@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/swiper/-/swiper-6.0.0.tgz#9934ecd569611b660a2a9bf200f25ce5ba4b4d63"
+  integrity sha512-QPZRgxZ+ivXXtzV43B3LxpXUIC7FE/EoKM+rtxngmgt2M7eeUYypZhyqZD8UxJtlBcUDw/ATGoVeSNpvBBrz2w==
+  dependencies:
+    swiper "*"
+
 "@types/testing-library__dom@*":
   version "7.5.0"
   resolved "https://registry.npmjs.org/@types/testing-library__dom/-/testing-library__dom-7.5.0.tgz"
@@ -9587,6 +9594,11 @@ svgo@^2.7.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
+
+swiper@*:
+  version "14.4.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-14.4.0.tgz#9c6a7f787e1afdb52862e3f2c7c0d16bc3652108"
+  integrity sha512-6axnAuBsttFJe0gwsM5tT203/Bts0vcI+FwIX6dqFE4pUFVW6qrdRprNFQVxOYMW7V0S6A/KIqJ6JaPpNN2MCw==
 
 swiper@^8.3.1:
   version "8.4.7"
