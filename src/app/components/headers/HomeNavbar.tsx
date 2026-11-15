@@ -1,9 +1,31 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
+import React, { useEffect, useState } from "react";
 
 export default function HomeNavbar() {
   const authMember = null; // Agar authentifikat bolgan user bolmasa mantigi uchun
+
+  const [count, setCount] = useState<number>(0);
+  const [value, setValue] = useState<boolean>(true);
+
+  useEffect(() => {
+    // component didUnmount hosil qilish
+    console.log("ComponentDidMount: Komponent ekranga chiqdi!"); // DATA FETCH
+    setCount(count + 1);
+
+    // willUnmount ni hosil qilish
+    return () => {
+      console.log("componentWillUnmount: Komponent ekrandan o'chirildi!");
+    };
+    // [] - array dependency - component update
+  }, [value]);
+
+  /** HANDLERS */
+  const buttonHandler = () => {
+    setValue(!value);
+  };
+
   return (
     <div className="home-navbar">
       {/* Container 2 tarafdan default holatda ma'lum bir padding tashlayd */}
@@ -71,10 +93,14 @@ export default function HomeNavbar() {
           <Stack className={"detail"}>
             <Box className={"head-main-txt"}>World's Most Delicous Cousine</Box>
             <Box className={"welcome-txt"}>The Choice, not just a choice</Box>
-            <Box className={"service-text"}>24 hours service</Box>
+            <Box className={"service-text"}>{count} hours service</Box>
             <Box className={"signup"}>
               {!authMember ? (
-                <Button variant={"contained"} className={"signup-button"}>
+                <Button
+                  variant={"contained"}
+                  className={"signup-button"}
+                  onClick={buttonHandler}
+                >
                   SIGN UP
                 </Button>
               ) : null}
