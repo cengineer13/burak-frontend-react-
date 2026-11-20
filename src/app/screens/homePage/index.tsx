@@ -23,6 +23,7 @@ const popularDishesRetriever = createSelector(
   (popularDishes) => ({ popularDishes }),
 );
 
+console.log(process.env.REACT_APP_URL);
 export default function HomePage() {
   const { setPopularDishes } = actionDispatch(useDispatch());
   const { popularDishes } = useSelector(popularDishesRetriever);
