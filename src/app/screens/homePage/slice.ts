@@ -23,6 +23,7 @@ const homePageSlice = createSlice({
   },
 });
 
+// Bu pastda export qilinganlar actionlar hisoblanadi.
 export const { setPopularDishes, setNewDishes, setTopUsers } =
   homePageSlice.actions;
 
