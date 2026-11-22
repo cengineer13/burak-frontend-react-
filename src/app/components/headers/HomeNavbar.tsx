@@ -9,17 +9,17 @@ export default function HomeNavbar() {
   const [count, setCount] = useState<number>(0);
   const [value, setValue] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   // component didUnmount hosil qilish
-  //   console.log("ComponentDidMount: Komponent ekranga chiqdi!"); // DATA FETCH
-  //   setCount(count + 1);
+  useEffect(() => {
+    // component didnmount hosil qilish
+    console.log("ComponentDidMount: Komponent ekranga chiqdi!"); // DATA FETCH
+    setCount(count + 1);
 
-  //   // willUnmount ni hosil qilish
-  //   return () => {
-  //     console.log("componentWillUnmount: Komponent ekrandan o'chirildi!");
-  //   };
-  //   // [] - array dependency - component update
-  // }, [value]);
+    // willUnmount ni hosil qilish
+    return () => {
+      console.log("componentWillUnmount: Komponent ekrandan o'chirildi!");
+    };
+    // [] - array dependency - component update
+  }, [value]);
 
   /** HANDLERS */
   const buttonHandler = () => {
