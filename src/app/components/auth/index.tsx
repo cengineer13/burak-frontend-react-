@@ -8,7 +8,7 @@ import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
-import { MemberInput } from "../../../lib/types/member";
+import { LoginInput, MemberInput } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
@@ -63,15 +63,31 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const handlePasswordKeyDown = (e: T) => {
     if (e.key === "Enter" && signupOpen) {
       handleSignupRequest();
+    } else if (e.key === "Enter" && loginOpen) {
+      // loginRequest
+      handleLoginRequest().then();
     }
+  };
+  const resetInputsAndCloseSignup = () => {
+    setMemberNick("");
+    setMemberPhone("");
+    setMemberPassword("");
+    handleSignupClose();
+  };
+
+  const resetInputsAndCloseLogin = () => {
+    setMemberNick("");
+    setMemberPassword("");
+    handleLoginClose();
   };
 
   // Backendga yuborish
   const handleSignupRequest = async () => {
     try {
-      console.log("inputs:", memberNick, memberPhone, memberPassword);
       const isFullfill =
-        memberNick !== "" && memberPhone !== "" && memberPassword !== "";
+        memberNick.trim() !== "" &&
+        memberPhone.trim() !== "" &&
+        memberPassword.trim() !== "";
       if (!isFullfill) throw new Error(Messages.error3);
 
       const singupInput: MemberInput = {
@@ -82,7 +98,32 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const result = await member.signup(singupInput);
+
+      // Saving Authentificated User
+      resetInputsAndCloseSignup();
+    } catch (err) {
+      console.log(err);
       handleSignupClose();
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  const handleLoginRequest = async () => {
+    try {
+      const isFullfill =
+        memberNick.trim() !== "" && memberPassword.trim() !== "";
+      if (!isFullfill) throw new Error(Messages.error3);
+
+      const loginInput: LoginInput = {
+        memberNick: memberNick,
+        memberPassword: memberPassword,
+      };
+
+      const member = new MemberService();
+      const result = await member.login(loginInput);
+
+      // Saving Authentificated User
+      resetInputsAndCloseLogin();
     } catch (err) {
       console.log(err);
       handleSignupClose();
@@ -118,6 +159,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 id="outlined-basic"
                 label="username"
                 variant="outlined"
+                value={memberNick}
                 onChange={handleUsername}
               />
               <TextField
@@ -125,12 +167,14 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 id="outlined-basic"
                 label="phone number"
                 variant="outlined"
+                value={memberPhone}
                 onChange={handlePhone}
               />
               <TextField
                 id="outlined-basic"
                 label="password"
                 variant="outlined"
+                value={memberPassword}
                 onChange={handlePassword}
                 onKeyDown={handlePasswordKeyDown}
               />
@@ -180,17 +224,23 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 label="username"
                 variant="outlined"
                 sx={{ my: "10px" }}
+                value={memberNick}
+                onChange={handleUsername}
               />
               <TextField
                 id={"outlined-basic"}
                 label={"password"}
                 variant={"outlined"}
                 type={"password"}
+                value={memberPassword}
+                onChange={handlePassword}
+                onKeyDown={handlePasswordKeyDown}
               />
               <Fab
                 sx={{ marginTop: "27px", width: "120px" }}
                 variant={"extended"}
                 color={"primary"}
+                onClick={handleLoginRequest}
               >
                 <LoginIcon sx={{ mr: 1 }} />
                 Login
