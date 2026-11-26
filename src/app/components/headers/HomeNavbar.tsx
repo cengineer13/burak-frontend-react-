@@ -98,7 +98,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               onDelete={onDelete}
               onDeleteAll={onDeleteAll}
             />
-
             {!authMember ? (
               <Box>
                 <Button
@@ -121,7 +120,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 onClick={handleLogoutClick}
               />
             )}
-
             <Menu
               anchorEl={anchorEl}
               id="account-menu"

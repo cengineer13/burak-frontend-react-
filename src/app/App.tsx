@@ -22,9 +22,11 @@ import {
 } from "../lib/sweetAlert";
 import { Messages } from "../lib/config";
 import MemberService from "./services/MemberService";
+import { useGlobals } from "./hooks/useGlobals";
 
 function App() {
   const location = useLocation();
+  const { setAuthMember } = useGlobals();
   /** Customized Hooks */
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
   const [signupOpen, setSignupOpen] = useState<boolean>(false);
@@ -41,8 +43,10 @@ function App() {
   const handleLogoutRequest = async () => {
     try {
       const member = new MemberService();
-      
+      await member.logout();
+
       await sweetTopSmallSuccessAlert("succes", 700);
+      setAuthMember(null);
     } catch (err) {
       console.log(err);
       sweetErrorHandling(Messages.error1);
@@ -74,6 +78,10 @@ function App() {
           onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
+          anchorEl={anchorEl}
+          handleLogoutClick={handleLogoutClick}
+          handleCloseLogout={handleCloseLogout}
+          handleLogoutRequest={handleLogoutRequest}
         />
       )}
       <Switch>
