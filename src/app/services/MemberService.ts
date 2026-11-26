@@ -56,6 +56,7 @@ class MemberService {
   public async login(input: LoginInput): Promise<Member> {
     try {
       const url = this.path + "/member/login";
+      // withCredentials - front va backend ortasida coockie ma'lumot almashadi
       const result = await axios.post(url, input, { withCredentials: true });
       console.log("login result:", result);
 
@@ -66,6 +67,21 @@ class MemberService {
       return member;
     } catch (err) {
       console.log("error on login:", err);
+      throw err;
+    }
+  }
+  public async logout(): Promise<boolean> {
+    try {
+      const url = this.path + "/member/logout";
+      // withCredentials - front va backend ortasida coockie ma'lumot almashadi
+      const result = await axios.post(url, {}, { withCredentials: true });
+      console.log("logout result:", result);
+
+      localStorage.removeItem("memberData");
+
+      return result.data.logout;
+    } catch (err) {
+      console.log("error on Logout:", err);
       throw err;
     }
   }

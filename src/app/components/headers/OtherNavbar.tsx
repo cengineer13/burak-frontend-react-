@@ -2,6 +2,8 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 import { CartItem } from "../../../lib/types/search";
+import { useGlobals } from "../../hooks/useGlobals";
+import { serverApi } from "../../../lib/config";
 
 export interface OtherNavbarProps {
   cartItems: CartItem[];
@@ -23,7 +25,8 @@ export default function OtherNavbar(props: OtherNavbarProps) {
     setSignupOpen,
     setLoginOpen,
   } = props;
-  const authMember = null;
+  const { authMember } = useGlobals(); // Agar authentifikat bolgan user bolmasa mantigi uchun
+
   return (
     <div className="other-navbar">
       {/* Container 2 tarafdan default holatda ma'lum bir padding tashlayd */}
@@ -87,7 +90,11 @@ export default function OtherNavbar(props: OtherNavbarProps) {
             ) : (
               <img
                 className="user-avatar"
-                src={"/icons/default-user.svg"}
+                src={
+                  authMember?.memberImage
+                    ? `${serverApi}/${authMember?.memberImage}`
+                    : "/icons/default-user.svg"
+                }
                 aria-haspopup={true}
               />
             )}

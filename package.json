@@ -24,6 +24,7 @@
     "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.23",
     "swiper": "^8.3.1",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
