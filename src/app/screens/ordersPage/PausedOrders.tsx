@@ -10,7 +10,7 @@ import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 import { Order, OrderItem } from "../../../lib/types/order";
 
-/** REDUX SELECTOR */
+/** REDUX SLICE & SELECTOR */
 const pausedOrdersRetriever = createSelector(
   retrievePausedOrders,
   (pausedOrders) => ({ pausedOrders }),
@@ -18,6 +18,8 @@ const pausedOrdersRetriever = createSelector(
 
 export default function PausedOrders() {
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
+
+  /** HANDLERS */
 
   return (
     <TabPanel value={"1"}>
