@@ -58,11 +58,10 @@ class OrderService {
     try {
       const url = `${this.path}/order/update`;
       const result = await axios.post(url, input, { withCredentials: true });
-      console.log("getMyOrders:", result);
-
+      console.log("updateOrder:", result);
       return result.data;
     } catch (err) {
-      console.log("Error on getMyOrders:", err);
+      console.log("Error on updateOrder:", err);
       throw err;
     }
   }

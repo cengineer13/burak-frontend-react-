@@ -47,7 +47,6 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
         await order.updateOrder(input);
         // => FINISH ORDER bolimga o'tganda:
         setValue("3");
-
         // ORDER REBUILT (Process va FInishga otganda REFRESH MANTIGI)
         setOrderBuilder(new Date());
       }
