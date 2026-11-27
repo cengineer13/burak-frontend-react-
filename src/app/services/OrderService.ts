@@ -1,5 +1,10 @@
 import { serverApi } from "../../lib/config";
-import { Order, OrderInquiry, OrderItemInput } from "../../lib/types/order";
+import {
+  Order,
+  OrderInquiry,
+  OrderItemInput,
+  OrderUpdateInput,
+} from "../../lib/types/order";
 import { Product, ProductInquiry } from "../../lib/types/product";
 import axios from "axios";
 import { CartItem } from "../../lib/types/search";
@@ -40,6 +45,19 @@ class OrderService {
       const query = `?page=${input.page}&limit=${input.limit}&orderStatus=${input.orderStatus}`;
 
       const result = await axios.get(url + query, { withCredentials: true });
+      console.log("getMyOrders:", result);
+
+      return result.data;
+    } catch (err) {
+      console.log("Error on getMyOrders:", err);
+      throw err;
+    }
+  }
+
+  public async updateOrder(input: OrderUpdateInput): Promise<Order> {
+    try {
+      const url = `${this.path}/order/update`;
+      const result = await axios.post(url, input, { withCredentials: true });
       console.log("getMyOrders:", result);
 
       return result.data;

@@ -13,10 +13,14 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       ? JSON.parse(localStorage.getItem("memberData") as string)
       : null,
   );
+
+  const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());
   if (authMember) console.log("==== Verified TOKEN is available in Cookies");
 
   return (
-    <GlobalContext.Provider value={{ authMember, setAuthMember }}>
+    <GlobalContext.Provider
+      value={{ authMember, setAuthMember, orderBuilder, setOrderBuilder }}
+    >
       {children}
     </GlobalContext.Provider>
   );
